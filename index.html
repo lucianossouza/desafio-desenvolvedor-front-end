@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desafio | Frontend Developer</title>
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // - Inicio do fetch na API
+      function listProducts (data) {
+        const ul = document.getElementById("products-list");
+
+        const nextPageButton = document.getElementById("next-page");
+        nextPageButton.addEventListener("click", function () {
+          fetchProducts(`https://${data.nextPage}`);
+        });
+
+        data.products.map(function (product) {
+            let li = document.createElement("li");
+            let img = document.createElement("img");
+            let name = document.createElement("p");
+            let description = document.createElement("p");
+            let oldPrice = document.createElement("p");
+            let price = document.createElement("p");
+            let installments = document.createElement("p");
+            let button = document.createElement("button");
+
+            img.src = product.image;
+            name.innerHTML = product.name;
+            description.innerHTML = product.description;
+            price.innerHTML = `Por: ${product.price.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}`;
+            oldPrice.innerHTML = `De: ${product.oldPrice.toLocaleString(
+              "pt-BR",
+              { style: "currency", currency: "BRL" }
+            )}`;
+            installments.innerHTML = `ou ${
+              product.installments.count
+            }x de ${product.installments.value.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}`;
+            button.innerText = "Comprar";
+
+            li.classList.add("product-container");
+            img.classList.add("product-img");
+            name.classList.add("product-name");
+            description.classList.add("product-description");
+            oldPrice.classList.add("product-oldPrice");
+            price.classList.add("product-price");
+            oldPrice.classList.add("product-oldPrice");
+            installments.classList.add("product-installments");
+            button.classList.add("product-button");
+
+            li.appendChild(img);
+            li.appendChild(name);
+            li.appendChild(description);
+            li.appendChild(oldPrice);
+            li.appendChild(price);
+            li.appendChild(installments);
+            li.appendChild(button);
+            ul.appendChild(li);
+          });
+      }
+
+      function fetchProducts (url) {
+        fetch(
+          // "https://frontend-intern-challenge-api.iurykrieger.vercel.app/products?page=1"
+          url
+        )
+          .then((resp) => resp.json())
+          .then(function (data) {
+          // const ul = document.getElementById("products-list");
+          // let products = data.products;
+
+          // const nextPageButton = document.getElementById("next-page");
+          // nextPageButton.onclick(function () {
+
+          // })
+
+            listProducts(data);
+
+          // products.map(function (product) {
+          //   let li = document.createElement("li");
+          //   let img = document.createElement("img");
+          //   let name = document.createElement("p");
+          //   let description = document.createElement("p");
+          //   let oldPrice = document.createElement("p");
+          //   let price = document.createElement("p");
+          //   let installments = document.createElement("p");
+          //   let button = document.createElement("button");
+
+          //   img.src = product.image;
+          //   name.innerHTML = product.name;
+          //   description.innerHTML = product.description;
+          //   price.innerHTML = `Por: ${product.price.toLocaleString("pt-BR", {
+          //     style: "currency",
+          //     currency: "BRL",
+          //   })}`;
+          //   oldPrice.innerHTML = `De: ${product.oldPrice.toLocaleString(
+          //     "pt-BR",
+          //     { style: "currency", currency: "BRL" }
+          //   )}`;
+          //   installments.innerHTML = `ou ${
+          //     product.installments.count
+          //   }x de ${product.installments.value.toLocaleString("pt-BR", {
+          //     style: "currency",
+          //     currency: "BRL",
+          //   })}`;
+          //   button.innerText = "Comprar";
+
+          //   li.classList.add("product-container");
+          //   img.classList.add("product-img");
+          //   name.classList.add("product-name");
+          //   description.classList.add("product-description");
+          //   oldPrice.classList.add("product-oldPrice");
+          //   price.classList.add("product-price");
+          //   oldPrice.classList.add("product-oldPrice");
+          //   installments.classList.add("product-installments");
+          //   button.classList.add("product-button");
+
+          //   li.appendChild(img);
+          //   li.appendChild(name);
+          //   li.appendChild(description);
+          //   li.appendChild(oldPrice);
+          //   li.appendChild(price);
+          //   li.appendChild(installments);
+          //   li.appendChild(button);
+          //   ul.appendChild(li);
+          // });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+
+      window.onload = fetchProducts("https://frontend-intern-challenge-api.iurykrieger.vercel.app/products?page=1");
+    </script>
+  </head>
+  <body>
+    <!--Template header-->
+    <header class="header">
+      <h3>uma seleção de produtos</h3>
+
+      <h2>especial para você</h2>
+
+      <p>
+        Todos os produtos desta lista foram selecionados a partir da
+        sua navegação. Aproveite!
+      </p>
+
+      <div class="menu">
+        <ul class="list-menu">
+          <li class="button">
+            <a href="#">Conheça a Linx</a>
+          </li>
+          <li class="button">
+            <a href="#">Ajude o algorítimo</a>
+          </li>
+          <li class="button">
+            <a href="#">Seus produtos</a>
+          </li>
+          <li class="button">
+            <a href="#"><span>Compartilhe</span></a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!--Template container-->
+    <main class="container">
+      <section>
+        <div class="text">
+          <h3>Ajude o algorítimo a ser mais certeiro</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Pellentesque ultricies tellus nec mi porta convallis sollicitudin eu
+            urna. Mauris rhoncus erat sed interdum dignissim. Suspendisse semper
+            pretium consectetur. Praesent bibendum arcu risus, sit amet iaculis
+            ex tempus quis. Cras et erat ut tellus vulputate tincidunt. Aenean
+            lacinia euismod augue vel egestas. Class aptent taciti sociosqu ad
+            litora torquent per conubia nostra, per inceptos himenaeos.
+            Vestibulum vel urna tortor. Vivamus et arcu non felis tristique
+            eleifend.
+          </p>
+          <p>
+            Morbi eu condimentum urna. Curabitur eu magna eget turpis
+            condimentum ultrices. Suspendisse quis lorem ultricies, pulvinar
+            purus sed, egestas erat. Etiam ultricies a ante vehicula pharetra.
+            Quisque ut neque mattis, consequat velit ut, ultrices orci. Nulla
+            varius elementum erat vel pharetra. Aenean sit amet nisi diam. Morbi
+            viverra, magna ac luctus commodo, odio ante suscipit libero, at
+            mattis augue est vel metus.
+          </p>
+        </div>
+
+        <!--Template form-->
+        <!-- <form action="/pagina-processa-dados-do-form" method="post"> -->
+        <form onsubmit="">
+          <div>
+            <label for="name">Seu nome:</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Digite seu nome completo"
+            />
+          </div>
+          <div>
+            <label for="mail">E-mail:</label>
+            <input type="email" id="mail" placeholder="Digite seu email" />
+          </div>
+          <div>
+            <label for="cpf">CPF:</label>
+            <input
+              type="number"
+              id="cpf"
+              value="number"
+              placeholder="Digite seu CPF"
+            />
+          </div>
+          <fieldset>
+            <label for="masculino"
+              ><input
+                type="radio"
+                id="genro"
+                value="masculino"
+              />Masculino</label>
+            <label for="feminino"><input type="radio" id="genro" value="feminino" />Feminino</label>
+          </fieldset>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </section>
+
+      <!--Template product-title-->
+      <div id="title">
+        <div class="linha-horizontal"></div>
+        <h2 class="product-title">Sua seleção especial</h2>
+        <div class="linha-horizontal"></div>
+      </div>
+
+      <!--Template product-list-->
+      <ul id="products-list"></ul>
+      <button id="next-page">Ainda mais produtos aqui!</button>
+
+      <div id="title">
+        <div class="linha-horizontal"></div>
+        <h2 class="product-title">Compartilhe a novidade</h2>
+        <div class="linha-horizontal"></div>
+      </div>
+
+      <div id="footer-newsletter">
+        <b>Quer que seus amigos também ganhem a lista personalizada deles? Preencha agora!</b>
+      </div>
+
+      <form onsubmit="" class="friends">
+        <div id="friends">
+          <label  for="name">Nome do seu amigo:</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Digite o nome do seu amigo"
+          />
+        </div>
+        <div id="friends">
+          <label for="mail">E-mail:</label>
+          <input type="email" id="mail" placeholder="Digite o email do seu amigo" />
+        </div>
+        </form>
+        <button type="submit" class="btn btn-second">Enviar agora</button>
+    </main>
+    <!--Template footer-->
+    <footer class="footer">
+      <p>Testando suas habilidades em HTML, CSS e JS.</p>
+      <p>Linx Impulse</p>
+      <p>2019</p>
+    </footer>
+  </body>
+</html>
