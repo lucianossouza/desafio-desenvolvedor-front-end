@@ -88,6 +88,16 @@ ul {
   display: inline-block;
   text-align: center;
 }
+
+ .list-menu li:hover {
+  background: #c2c2c2;
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--light-color);
+}
+
 /* ------------------------------------------------------ END HEADER ------------------------------------------------------ */
 
 
