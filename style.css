@@ -375,9 +375,42 @@ button.btn.btn-second {
 }
 
 @media screen and (max-width: 520px) {
+
+  header {
+    text-align: left;
+    align-items: flex-start;
+
+  }
+  h3,h2,p.first-p {
+    margin-left: 16px;
+  }
+
   .list-menu {
     gap: 20px;
+    justify-content: center;
+    
   }
+  .text {
+    margin-bottom: 30px;
+  }
+  input {
+    width: 450px;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    width: 450px;
+  }
+  #title {
+    width: 480px;
+  }
+
+  b {
+    text-align: center;
+    display: flex;
+    margin-bottom: -28px;
+  }
+
 }
 
 /* @media screen and (max-width: 420px){
