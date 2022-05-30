@@ -20,4 +20,4 @@ Algumas formas de testar são:
 - Acecessando o [Link do live preview](https://transcendent-bonbon-560a34.netlify.app/)
 - Baixando o ZIP e abrindo com qualquer navegador
 - Clonando via terminal
-- Nenhum terminal dentro do diretório que deseja o projeto: ``` baixargit clone https://github.com/lucianossouza/desafio-desenvolvedor-front-end.git ```
+- Nenhum terminal dentro do diretório que deseja o projeto: ```git clone https://github.com/lucianossouza/desafio-desenvolvedor-front-end.git ```
